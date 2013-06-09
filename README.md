@@ -7,7 +7,7 @@ SymfonySchemaBundle
 
 Add the following lines in your composer.json:
 
-```
+```json
 {
     "require": {
         "iliev/symfony-schema": "dev-master",
@@ -19,7 +19,7 @@ Add the following lines in your composer.json:
 
 To start using the bundle, register the bundle in your application's kernel class:
 
-``` php
+```php
 // app/AppKernel.php
 public function registerBundles()
 {
@@ -34,7 +34,7 @@ public function registerBundles()
 
 Below is the full default configuration for the bundle:
 
-``` yaml
+```yaml
 # app/config/config.yml
 iliev_symfony_schema:
     database:
@@ -53,27 +53,25 @@ iliev_symfony_schema:
 
 ## Usage
 
-Create your update scripts in the "working_path" of this bundle.
+Create your update scripts in the *working_path* of this bundle.
 It is recommended to follow a naming convention to ensure incremental updates.
 
 Example:
 ```
-# schema/sql/updates/
-  |
-  .
-  ..
-  -- 20130606-1.sql
-  -- 20130608-1.sql
-  -- 20130609-1.sql
-  -- 20130609-2.sql
-  -- 20130609-3.sql
-```
+$ ls schema/sql/updates/ -l
+total 24
+-rw-r--r-- 1 user user 181 Jun  9 17:19 20130606-1.sql
+-rw-r--r-- 1 user user 135 Jun  9 17:19 20130608-1.sql
+-rw-r--r-- 1 user user 270 Jun  9 17:19 20130608-2.sql
+-rw-r--r-- 1 user user 537 Jun  9 17:19 20130609-1.sql
+-rw-r--r-- 1 user user 360 Jun  9 17:20 20130609-2.sql
+-rw-r--r-- 1 user user 184 Jun  9 17:20 20130609-3.sql
 
 Each file should contain a description block
 
 ### Multi line example:
 
-```
+```sql
 # schema/sql/updates/20130609-1.sql
 
 #
@@ -89,7 +87,7 @@ ALTER TABLE `accounts` ADD `username_normalized` VARCHAR(255) NOT NULL AFTER `us
 
 ### Single line example:
 
-```
+```sql
 # schema/sql/updates/20130609-2.sql
 
 #
