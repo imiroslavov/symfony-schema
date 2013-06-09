@@ -13,7 +13,7 @@ namespace Iliev\SymfonySchemaBundle\Connection\Adapter;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
+use Iliev\SymfonySchemaBundle\ParameterBag\ParameterBag;
 
 /**
  * @author Iliya Miroslavov Iliev <i.miroslavov@gmail.com>
@@ -24,7 +24,7 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
      * @var ContainerInterface
      */
     protected $container;
-    
+
     /**
      * @var ParameterBag
      */
@@ -34,11 +34,11 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
      * @var string
      */
     protected $connectionName;
-    
+
     /**
-     * @param \Symfony\Component\DependencyInjection\Container $container
+     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      */
-    public function __construct($container)
+    public function __construct(ContainerInterface $container)
     {
         $this->setContainer($container);
     }
@@ -70,7 +70,7 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
       
       return $this->parameterBag;
     }
-    
+
     /**
      * @return string
      */
@@ -78,7 +78,7 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
     {
         return $this->connectionName;
     }
-    
+
     /**
      * @param string $connectionName
      */
@@ -88,7 +88,7 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
         
         $this->initializeParameterBag();
     }
-    
+
     abstract public function initializeParameterBag();
     abstract public function createConnection();
 }

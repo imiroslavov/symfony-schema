@@ -18,7 +18,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressHelper;
 use Symfony\Component\Finder\Finder;
-use Iliev\SymfonySchemaBundle\ParameterBag\ParameterBag;
 
 /**
  * @author Iliya Miroslavov Iliev <i.miroslavov@gmail.com>
@@ -97,8 +96,8 @@ EOT
     {
         $this->embedIOInterfaces($input, $output);
         $this->validateWorkingPath();
-        $this->initializeDatabase();
         $this->initializeParameters();
+        $this->initializeDatabase();
         $this->initializeProgressBar();
     }
 
@@ -210,18 +209,6 @@ EOT
             $this->output->writeln('<comment>Done.</comment>');
         }
     }
-    
-    /**
-     * @return ParameterBag
-     */
-    protected function getParameterBag()
-    {
-      if (null === $this->parameterBag) {
-          $this->parameterBag = new ParameterBag();
-      }
-      
-      return $this->parameterBag;
-    }
 
     /**
      * Initialize the command parameters
@@ -230,16 +217,16 @@ EOT
      */
     private function initializeParameters()
     {
-        $connection = $this->getConnectionAdapter()->getParameterBag();
-        
-        $this->getParameterBag()->set('username', $this->input->getOption('username') ?: $connection->get('username'));
-        $this->getParameterBag()->set('password', $this->input->getOption('password') ?: $connection->get('password'));
-        $this->getParameterBag()->set('database', $this->input->getOption('database') ?: $connection->get('database'));
+        $parameterBag = $this->getConnectionAdapter()->getParameterBag();
 
-        $this->getParameterBag()->set('host', $this->input->getOption('host') ?: $connection->get('host'));
-        $this->getParameterBag()->set('port', $this->input->getOption('port') ?: $connection->get('port'));
+        $parameterBag->set('username', $this->input->getOption('username') ?: $parameterBag->get('username'));
+        $parameterBag->set('password', $this->input->getOption('password') ?: $parameterBag->get('password'));
+        $parameterBag->set('database', $this->input->getOption('database') ?: $parameterBag->get('database'));
+
+        $parameterBag->set('host', $this->input->getOption('host') ?: $parameterBag->get('host'));
+        $parameterBag->set('port', $this->input->getOption('port') ?: $parameterBag->get('port'));
         
-        $this->getParameterBag()->set('mysql_client', $this->input->getOption('mysql') ?: trim(`which mysql`));
+        $parameterBag->set('mysql_client', $this->input->getOption('mysql') ?: trim(`which mysql`));
     }
     
     /**
@@ -398,17 +385,19 @@ EOT
     protected function getShellCommandFormat()
     {
         if (null === $this->shellCommand) {
+            $parameterBag = $this->getConnectionAdapter()->getParameterBag();
+            
             $this->shellCommand = sprintf(
                 '%s -h%s -P%d -D%s -u%s %s < %%s 2>&1',
-                $this->getParameterBag()->get('mysql_client'),
-                $this->getParameterBag()->get('host'),
-                $this->getParameterBag()->get('port'),
-                $this->getParameterBag()->get('database'),
-                $this->getParameterBag()->get('username'),
-                ((!$this->getParameterBag()->isEmpty('password')) ? sprintf('-p%s', $this->getParameterBag()->get('password')) : '')
+                $parameterBag->get('mysql_client'),
+                $parameterBag->get('host'),
+                $parameterBag->get('port'),
+                $parameterBag->get('database'),
+                $parameterBag->get('username'),
+                ((!$parameterBag->isEmpty('password')) ? sprintf('-p%s', $parameterBag->get('password')) : '')
             );
         }
-        
+
         return $this->shellCommand;
     }
 

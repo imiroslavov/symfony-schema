@@ -17,6 +17,11 @@ namespace Iliev\SymfonySchemaBundle\Connection\Adapter;
 class PropelAdapter extends ConnectionAdapter
 {
     /**
+     * @var array
+     */
+    private $configuration;
+
+    /**
      * @throws \InvalidArgumentException
      */
     public function initializeParameterBag()
@@ -24,24 +29,29 @@ class PropelAdapter extends ConnectionAdapter
         $propelConfiguration = $this->getContainer()->get('propel.configuration');
 
         if (isset($propelConfiguration['datasources'][$this->getConnectionName()])) {
-            $config = $propelConfiguration['datasources'][$this->getConnectionName()];
+            $this->configuration = $propelConfiguration['datasources'][$this->getConnectionName()];
         } else {
             throw new \InvalidArgumentException(sprintf('Connection named %s doesn\'t exist', $this->getConnectionName()));
         }
+
+        $this->getParameterBag()->set('username', $this->configuration['connection']['user']);
+        $this->getParameterBag()->set('password', $this->configuration['connection']['password']);
+        $this->getParameterBag()->set('database', $this->parseDsn($this->configuration['connection']['dsn'], '/dbname=([a-zA-Z0-9\_]+)/'));
         
-        $this->getParameterBag()->set('username', $config['connection']['user']);
-        $this->getParameterBag()->set('password', $config['connection']['password']);
-        $this->getParameterBag()->set('database', $this->parseDsn($config['connection']['dsn'], '/dbname=([a-zA-Z0-9\_]+)/'));
+        $this->getParameterBag()->set('host', $this->parseDsn($this->configuration['connection']['dsn'], '/host=([a-zA-Z0-9\_]+)/'));
+        $this->getParameterBag()->set('port', $this->parseDsn($this->configuration['connection']['dsn'], '/port=([0-9]+)/'));
         
-        $this->getParameterBag()->set('host', $this->parseDsn($config['connection']['dsn'], '/host=([a-zA-Z0-9\_]+)/'));
-        $this->getParameterBag()->set('port', $this->parseDsn($config['connection']['dsn'], '/port=([0-9]+)/'));
+        $this->getParameterBag()->set('adapter', $this->configuration['adapter']);
+        $this->getParameterBag()->set('charset', $this->parseDsn($this->configuration['connection']['dsn'], '/charset=([a-zA-Z0-9\_]+)/'));
     }
-    
+
     /**
      * @return \PropelPDO
      */
     public function createConnection()
     {
+        \Propel::setConfiguration($this->getTemporaryConfiguration());
+        
         return \Propel::getConnection($this->getConnectionName());
     }
 
@@ -58,5 +68,28 @@ class PropelAdapter extends ConnectionAdapter
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getTemporaryConfiguration()
+    {
+        $dsn = sprintf(
+            '%s:host=%s;port=%d;dbname=%s;charset=%s',
+            $this->getParameterBag()->get('adapter'),
+            $this->getParameterBag()->get('host'),
+            $this->getParameterBag()->get('port'),
+            $this->getParameterBag()->get('database'),
+            $this->getParameterBag()->get('charset')
+        );
+
+        $this->configuration['connection']['dsn']      = $dsn;
+        $this->configuration['connection']['user']     = $this->getParameterBag()->get('username');
+        $this->configuration['connection']['password'] = $this->getParameterBag()->get('password');
+
+        return array(
+            'datasources' => array($this->getConnectionName() => $this->configuration)
+        );
     }
 }
