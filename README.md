@@ -68,9 +68,9 @@ total 24
 -rw-r--r-- 1 user user 184 Jun  9 17:20 20130609-3.sql
 ```
 
-Each file should contain a description block
+Each file should contain a description block.
 
-### Multi line example:
+##### Multi line example:
 
 ```sql
 # schema/sql/updates/20130609-1.sql
@@ -86,7 +86,7 @@ Each file should contain a description block
 ALTER TABLE `accounts` ADD `username_normalized` VARCHAR(255) NOT NULL AFTER `username_canonical`;
 ```
 
-### Single line example:
+##### Single line example:
 
 ```sql
 # schema/sql/updates/20130609-2.sql
