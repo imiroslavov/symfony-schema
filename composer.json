@@ -1,0 +1,22 @@
+{
+    "name": "iliev/symfony-schema",
+    "type": "symfony-bundle",
+    "description": "Symfony 2 console command for dynamic database manipulation",
+    "keywords": ["command", "schema", "update"],
+    "homepage": "https://github.com/imiroslavov/symfony-schema",
+    "license": "Beerware (revision: 42)",
+    "authors": [
+        {
+            "name":  "Iliya Miroslavov Iliev",
+            "email": "i.miroslavov@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": ">=2.2,<2.3-dev"
+    },
+    "autoload": {
+        "psr-0": { "Iliev": "src/" }
+    }
+}

@@ -1,0 +1,16 @@
+parameters:
+    connection_adapters:
+        propel: iliev_symfony_schema.connection_adapter.propel
+        doctrine: iliev_symfony_schema.connection_adapter.doctrine
+  
+services:
+    iliev_symfony_schema.connection_adapter.propel:
+        class: Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter
+        arguments: [@service_container]
+
+    iliev_symfony_schema.connection_adapter.doctrine:
+        class: Iliev\SymfonySchemaBundle\Connection\Adapter\DoctrineAdapter
+        arguments: [@service_container]
+
+    iliev_symfony_schema.helper.progress:
+        class: Iliev\SymfonySchemaBundle\Helper\ProgressHelper
