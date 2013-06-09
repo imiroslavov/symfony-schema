@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit 
+    colors="true"
+    bootstrap="src/Iliev/SymfonySchemaBundle/Tests/bootstrap.php" >
+
+    <testsuites>
+        <testsuite name="SymfonySchemaBundle test suite">
+            <directory suffix="Test.php">src/Iliev/SymfonySchemaBundle/Tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>src/Iliev/SymfonySchemaBundle/</directory>
+            <exclude>
+                <directory>src/Iliev/SymfonySchemaBundle/Resources</directory>
+                <directory>src/Iliev/SymfonySchemaBundle/Tests/bootstrap.php</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
