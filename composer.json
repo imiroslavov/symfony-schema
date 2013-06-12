@@ -4,7 +4,7 @@
     "description": "Symfony 2 console command for dynamic database manipulation",
     "keywords": ["command", "schema", "update"],
     "homepage": "https://github.com/imiroslavov/symfony-schema",
-    "license": "Beerware \(revision: 42\)",
+    "license": "Beerware",
     "authors": [
         {
             "name":  "Iliya Miroslavov Iliev",
