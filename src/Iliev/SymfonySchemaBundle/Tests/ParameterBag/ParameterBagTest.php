@@ -1,12 +1,12 @@
 <?php
 
 /*
- * ----------------------------------------------------------------------------
- * "THE BEER-WARE LICENSE" (Revision 42):
- * <i.miroslavov@gmail.com> wrote this file. As long as you retain this notice you
- * can do whatever you want with this stuff. If we meet some day, and you think
- * this stuff is worth it, you can buy me a beer in return Iliya Miroslavov Iliev
- * ----------------------------------------------------------------------------
+ * This file is part of the SymfonySchema package.
+ *
+ * (c) Iliya Miroslavov Iliev <i.miroslavov@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Iliev\SymfonySchemaBundle\Tests\ParameterBag;
