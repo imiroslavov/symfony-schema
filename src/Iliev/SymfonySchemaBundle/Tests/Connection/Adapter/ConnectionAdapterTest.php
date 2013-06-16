@@ -95,10 +95,6 @@ class TestableConnectionAdapter extends ConnectionAdapter
     }
 }
 
-class TestContainer extends Container
-{
-}
-
 class TestParameterBagException extends \Exception
 {
 }

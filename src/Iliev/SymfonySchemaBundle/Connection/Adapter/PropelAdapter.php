@@ -47,6 +47,7 @@ class PropelAdapter extends ConnectionAdapter
 
     /**
      * @return \PropelPDO
+     * @codeCoverageIgnore
      */
     public function createConnection()
     {

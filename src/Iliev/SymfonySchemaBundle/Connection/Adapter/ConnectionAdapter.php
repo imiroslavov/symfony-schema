@@ -72,6 +72,14 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
     }
 
     /**
+     * @param string $connectionName
+     */
+    public function setConnectionName($connectionName)
+    {
+        $this->connectionName = $connectionName;
+    }
+    
+    /**
      * @return string
      */
     protected function getConnectionName()
@@ -84,8 +92,8 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
      */
     public function initialize($connectionName)
     {
-        $this->connectionName = $connectionName;
-        
+        $this->setConnectionName($connectionName);
+
         $this->initializeParameterBag();
     }
 
