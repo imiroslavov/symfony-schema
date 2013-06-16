@@ -71,6 +71,7 @@ class ConnectionAdapterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\ConnectionAdapter::setConnectionName
+     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\ConnectionAdapter::getConnectionName
      */
     public function testSetConnectionName()
     {

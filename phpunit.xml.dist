@@ -14,8 +14,11 @@
         <whitelist>
             <directory>src/Iliev/SymfonySchemaBundle/</directory>
             <exclude>
-                <directory>src/Iliev/SymfonySchemaBundle/Resources</directory>
+                <directory>src/Iliev/SymfonySchemaBundle/Tests</directory>
                 <directory>src/Iliev/SymfonySchemaBundle/Tests/bootstrap.php</directory>
+                <directory>src/Iliev/SymfonySchemaBundle/Resources</directory>
+                <directory>src/Iliev/SymfonySchemaBundle/DependencyInjection</directory>
+                <directory>src/Iliev/SymfonySchemaBundle/IlievSymfonySchemaBundle.php</directory>
             </exclude>
         </whitelist>
     </filter>

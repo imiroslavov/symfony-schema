@@ -23,6 +23,8 @@ class ProgressHelper extends Helper
      * 
      * @param string $name
      * @param array $arguments
+     * 
+     * @codeCoverageIgnore
      */
     public function __call($name, $arguments)
     {

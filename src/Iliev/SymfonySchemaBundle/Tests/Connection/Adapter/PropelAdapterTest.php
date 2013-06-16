@@ -74,6 +74,7 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::initializeParameterBag
+     * 
      * @group initializeParameterBag
      */
     public function testInitializeParameterBag1()
@@ -91,6 +92,7 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::initializeParameterBag
+     * 
      * @group initializeParameterBag
      */
     public function testInitializeParameterBag2()
@@ -108,7 +110,9 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::initializeParameterBag
+     * 
      * @group initializeParameterBag
+     * 
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Connection named test3 doesn't exist
      */
@@ -156,8 +160,9 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
 }
 
 /**
- * @codeCoverageIgnore
+ * @codeCoverageIgnoreStart
  */
+
 class TestablePropelAdapter extends PropelAdapter
 {
     public function __parseDsn($dsn, $regex)
@@ -171,9 +176,6 @@ class TestablePropelAdapter extends PropelAdapter
     }
 }
 
-/**
- * @codeCoverageIgnore
- */
 class MockPropelConfiguration implements \ArrayAccess
 {
     protected $parameters; 
@@ -200,3 +202,7 @@ class MockPropelConfiguration implements \ArrayAccess
     {
     }
 }
+
+/**
+ * @codeCoverageIgnoreEnd
+ */
