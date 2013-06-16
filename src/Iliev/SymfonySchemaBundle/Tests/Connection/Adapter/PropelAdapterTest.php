@@ -73,7 +73,7 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers \Iliev\SymfonySchemaBundle\Tests\Connection\Adapter\PropelAdapter::initializeParameterBag
+     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::initializeParameterBag
      * @group initializeParameterBag
      */
     public function testInitializeParameterBag1()
@@ -90,7 +90,7 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers \Iliev\SymfonySchemaBundle\Tests\Connection\Adapter\PropelAdapter::initializeParameterBag
+     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::initializeParameterBag
      * @group initializeParameterBag
      */
     public function testInitializeParameterBag2()
@@ -106,19 +106,32 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1337', $this->adapter->getParameterBag()->get('port')); 
     }
     
+    /**
+     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::initializeParameterBag
+     * @group initializeParameterBag
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Connection named test3 doesn't exist
+     */
+    public function testInitializeParameterBag3()
+    {
+        $this->adapter->setConnectionName('test3');
+        $this->adapter->initializeParameterBag();
+    }
     
     /**
-     * @covers \Iliev\SymfonySchemaBundle\Tests\Connection\Adapter\PropelAdapter::parseDsn
+     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::parseDsn
      */
     public function testParseDsn()
     {
         $result = $this->adapter->__parseDsn('test_key=test_value;', '/test_key=([a-zA-Z0-9\_]+)/');
-        
         $this->assertEquals('test_value', $result);
+        
+        $result = $this->adapter->__parseDsn('test_key=test_value;', '/invalid_key=([a-zA-Z0-9\_]+)/');
+        $this->assertNull($result);
     }
     
     /**
-     * @covers \Iliev\SymfonySchemaBundle\Tests\Connection\Adapter\PropelAdapter::getTemporaryConfiguration
+     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\PropelAdapter::getTemporaryConfiguration
      */
     public function testGetTemporaryConfiguration()
     {
@@ -142,6 +155,9 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
+/**
+ * @codeCoverageIgnore
+ */
 class TestablePropelAdapter extends PropelAdapter
 {
     public function __parseDsn($dsn, $regex)
@@ -155,6 +171,9 @@ class TestablePropelAdapter extends PropelAdapter
     }
 }
 
+/**
+ * @codeCoverageIgnore
+ */
 class MockPropelConfiguration implements \ArrayAccess
 {
     protected $parameters; 

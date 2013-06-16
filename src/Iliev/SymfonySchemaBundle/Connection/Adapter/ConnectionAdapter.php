@@ -96,7 +96,7 @@ abstract class ConnectionAdapter implements ContainerAwareInterface
 
         $this->initializeParameterBag();
     }
-
+    
     abstract public function initializeParameterBag();
     abstract public function createConnection();
 }
