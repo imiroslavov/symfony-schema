@@ -17,6 +17,7 @@
         "symfony/framework-bundle": ">=2.2,<2.3-dev"
     },
     "require-dev": {
+        "doctrine/orm": "~2.2,>=2.2.3",
         "propel/propel-bundle": "1.2.*@dev"
     },
     "autoload": {

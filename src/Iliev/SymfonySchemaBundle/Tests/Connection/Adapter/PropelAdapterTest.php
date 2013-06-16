@@ -55,6 +55,10 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!class_exists('Propel')) {
+            $this->markTestSkipped('Propel not installed');
+        }
+        
         $configuration = $this->configuration();
 
         $container = new Container();
