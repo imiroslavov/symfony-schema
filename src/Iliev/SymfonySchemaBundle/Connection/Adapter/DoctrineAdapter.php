@@ -33,6 +33,8 @@ class DoctrineAdapter extends ConnectionAdapter
 
     /**
      * @return \Doctrine\DBAL\Connection
+     * 
+     * @codeCoverageIgnore
      */
     public function createConnection()
     {

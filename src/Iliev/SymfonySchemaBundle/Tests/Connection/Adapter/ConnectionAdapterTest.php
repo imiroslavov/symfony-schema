@@ -59,17 +59,6 @@ class ConnectionAdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\ConnectionAdapter::initialize
-     * 
-     * @expectedException \Iliev\SymfonySchemaBundle\Tests\Connection\Adapter\TestParameterBagException
-     */
-    public function testInitialize()
-    {
-        $adapter = new TestableConnectionAdapter(new Container());
-        $adapter->initialize('connection_name');
-    }
-    
-    /**
      * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\ConnectionAdapter::setConnectionName
      * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\ConnectionAdapter::getConnectionName
      */
@@ -92,6 +81,17 @@ class ConnectionAdapterTest extends \PHPUnit_Framework_TestCase
         $adapter->initialize('connection_name');
         
         $this->assertEquals('connection_name', $adapter->getConnectionName());
+    }
+
+    /**
+     * @covers \Iliev\SymfonySchemaBundle\Connection\Adapter\ConnectionAdapter::initialize
+     * 
+     * @expectedException \Iliev\SymfonySchemaBundle\Tests\Connection\Adapter\TestParameterBagException
+     */
+    public function testInitialize()
+    {
+        $adapter = new TestableConnectionAdapter(new Container());
+        $adapter->initialize('connection_name');
     }
 }
 
