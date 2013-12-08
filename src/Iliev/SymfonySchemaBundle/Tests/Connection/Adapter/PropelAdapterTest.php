@@ -159,10 +159,6 @@ class PropelAdapterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-/**
- * @codeCoverageIgnoreStart
- */
-
 class TestablePropelAdapter extends PropelAdapter
 {
     public function __parseDsn($dsn, $regex)
@@ -202,7 +198,3 @@ class MockPropelConfiguration implements \ArrayAccess
     {
     }
 }
-
-/**
- * @codeCoverageIgnoreEnd
- */

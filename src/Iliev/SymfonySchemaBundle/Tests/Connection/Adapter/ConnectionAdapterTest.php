@@ -95,9 +95,6 @@ class ConnectionAdapterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-/**
- * @codeCoverageIgnoreStart
- */
 class TestableConnectionAdapter extends ConnectionAdapter
 {
     public function __getContainer()
@@ -127,7 +124,3 @@ class TestContainer extends Container
 class TestParameterBagException extends \Exception
 {
 }
-
-/**
- * @codeCoverageIgnoreEnd
- */

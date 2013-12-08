@@ -84,10 +84,6 @@ class DoctrineAdapterTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-/**
- * @codeCoverageIgnoreStart
- */
-
 class MockDoctrineConection
 {
     protected $data;
@@ -129,7 +125,3 @@ class MockDoctrineConection
         return $this->driver;
     }
 }
-
-/**
- * @codeCoverageIgnoreEnd
- */
