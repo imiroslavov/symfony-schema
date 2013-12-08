@@ -11,10 +11,13 @@
             "email": "i.miroslavov@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/imiroslavov/symfony-schema/issues"
+    },
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": ">=2.2,<2.3-dev"
+        "symfony/framework-bundle": ">=2.2,<2.5-dev"
     },
     "require-dev": {
         "doctrine/orm": "~2.2,>=2.2.3",

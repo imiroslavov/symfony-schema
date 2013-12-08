@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/imiroslavov/symfony-schema.png?branch=master)](https://travis-ci.org/imiroslavov/symfony-schema)
+
 SymfonySchemaBundle
 ==============
 
